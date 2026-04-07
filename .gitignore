@@ -1,0 +1,28 @@
+# Virtual environment — hundreds of MBs, never commit
+venv/
+.venv/
+
+# Python bytecode cache — auto-generated, not source code
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE/editor settings — personal, not shared
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables — may contain secrets
+.env
+.env.local
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/

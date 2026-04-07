@@ -1,0 +1,5 @@
+# Python package dependencies for IT Dashboard
+# Add packages as you install them:
+#   pip freeze > requirements.txt
+# Install on another machine:
+#   pip install -r requirements.txt
