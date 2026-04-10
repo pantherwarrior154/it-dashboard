@@ -1,0 +1,26 @@
+hostname,ip_address,device_type,location,status,os,last_seen
+core-rtr-01,10.0.0.1,router,Server Room A,online,IOS-XE 17.6,2024-03-15 12:00:00
+core-rtr-02,10.0.0.2,router,Server Room A,online,IOS-XE 17.6,2024-03-15 12:00:00
+dist-sw-01,10.0.1.1,switch,Floor 1 IDF,online,IOS 15.2,2024-03-15 11:58:22
+dist-sw-02,10.0.2.1,switch,Floor 2 IDF,online,IOS 15.2,2024-03-15 11:59:01
+dist-sw-03,10.0.3.1,switch,Floor 3 IDF,offline,IOS 15.2,2024-03-14 16:30:00
+access-sw-101,10.0.1.10,switch,Floor 1 Closet A,online,IOS 15.2,2024-03-15 12:00:00
+access-sw-102,10.0.1.11,switch,Floor 1 Closet B,online,IOS 15.2,2024-03-15 11:55:14
+access-sw-201,10.0.2.10,switch,Floor 2 Closet A,online,IOS 15.2,2024-03-15 12:00:00
+access-sw-301,10.0.3.10,switch,Floor 3 Closet A,offline,IOS 15.2,2024-03-14 16:30:00
+fw-edge-01,10.0.0.254,firewall,Server Room A,online,ASA 9.18,2024-03-15 12:00:00
+fw-edge-02,10.0.0.253,firewall,Server Room B,online,ASA 9.18,2024-03-15 12:00:00
+srv-web-01,10.0.10.10,server,Server Room A,online,Ubuntu 22.04,2024-03-15 12:00:00
+srv-web-02,10.0.10.11,server,Server Room A,online,Ubuntu 22.04,2024-03-15 12:00:00
+srv-db-01,10.0.10.20,server,Server Room B,online,RHEL 9.2,2024-03-15 12:00:00
+srv-db-02,10.0.10.21,server,Server Room B,maintenance,RHEL 9.2,2024-03-15 08:00:00
+srv-mail-01,10.0.10.30,server,Server Room A,online,Windows Server 2022,2024-03-15 12:00:00
+srv-file-01,10.0.10.40,server,Server Room B,online,Windows Server 2022,2024-03-15 11:45:00
+srv-backup-01,10.0.10.50,server,Server Room B,online,Ubuntu 22.04,2024-03-15 12:00:00
+wap-floor1-01,10.0.1.200,wireless_ap,Floor 1 Main,online,AireOS 8.10,2024-03-15 12:00:00
+wap-floor2-01,10.0.2.200,wireless_ap,Floor 2 Main,online,AireOS 8.10,2024-03-15 12:00:00
+wap-floor3-01,10.0.3.200,wireless_ap,Floor 3 Main,offline,AireOS 8.10,2024-03-14 16:30:00
+printer-fl1,10.0.1.250,printer,Floor 1 Print Room,online,Firmware 4.2,2024-03-15 11:30:00
+printer-fl2,10.0.2.250,printer,Floor 2 Print Room,online,Firmware 4.2,2024-03-15 10:15:00
+printer-fl3,10.0.3.250,printer,Floor 3 Print Room,offline,Firmware 4.2,2024-03-14 16:30:00
+voip-gw-01,10.0.0.100,voip_gateway,Server Room A,online,SRST 14.2,2024-03-15 12:00:00

@@ -1,0 +1,41 @@
+2024-03-15 08:01:12 INFO  Server started on port 8080
+2024-03-15 08:01:13 INFO  Database connection established (pool_size=10)
+2024-03-15 08:01:15 INFO  Health check endpoint active at /health
+2024-03-15 08:03:44 INFO  User login: admin@company.com from 10.0.1.50
+2024-03-15 08:12:07 WARNING  Disk usage at 78% on /dev/sda1
+2024-03-15 08:15:22 INFO  Backup job started: daily_full
+2024-03-15 08:15:58 INFO  Backup job completed: daily_full (36 seconds)
+2024-03-15 08:22:19 ERROR  Connection refused to mail-relay.internal:587
+2024-03-15 08:22:20 ERROR  Failed to send alert email: SMTP timeout
+2024-03-15 08:30:00 INFO  Scheduled task: log rotation complete
+2024-03-15 08:45:11 WARNING  High memory usage: 4.2GB / 8GB (52%)
+2024-03-15 09:01:33 INFO  User login: jsmith@company.com from 10.0.2.15
+2024-03-15 09:05:44 INFO  API request: GET /api/devices (200 OK, 42ms)
+2024-03-15 09:12:18 ERROR  Disk read error on /dev/sdb: I/O timeout
+2024-03-15 09:12:19 WARNING  RAID array degraded: md0 (1 drive offline)
+2024-03-15 09:15:00 CRITICAL  Service unresponsive: postgres (PID 4521)
+2024-03-15 09:15:01 INFO  Auto-restart triggered for postgres
+2024-03-15 09:15:08 INFO  postgres restarted successfully (PID 4890)
+2024-03-15 09:22:55 INFO  API request: POST /api/tickets (201 Created, 88ms)
+2024-03-15 09:30:00 INFO  Certificate renewal check: 47 days remaining
+2024-03-15 09:35:12 WARNING  Disk usage at 82% on /dev/sda1
+2024-03-15 09:41:07 INFO  User logout: admin@company.com
+2024-03-15 09:55:03 ERROR  DNS resolution failed for updates.vendor.com
+2024-03-15 09:55:04 WARNING  Patch check skipped: cannot reach update server
+2024-03-15 10:00:00 INFO  Hourly metrics snapshot saved
+2024-03-15 10:05:28 INFO  User login: mgarcia@company.com from 10.0.3.22
+2024-03-15 10:12:44 INFO  API request: GET /api/reports/weekly (200 OK, 215ms)
+2024-03-15 10:30:00 INFO  Scheduled task: temp file cleanup (removed 128 files)
+2024-03-15 10:45:19 WARNING  High CPU usage: 89% (process: java, PID 3201)
+2024-03-15 10:45:22 INFO  Alert sent to ops-team@company.com: CPU threshold exceeded
+2024-03-15 11:00:00 INFO  Hourly metrics snapshot saved
+2024-03-15 11:15:33 ERROR  Authentication failure for user: unknown_user (3 attempts)
+2024-03-15 11:15:34 WARNING  Possible brute force attempt from 192.168.50.99
+2024-03-15 11:20:01 INFO  Firewall rule added: block 192.168.50.99
+2024-03-15 11:30:00 INFO  Scheduled task: log rotation complete
+2024-03-15 11:45:07 INFO  User login: jsmith@company.com from 10.0.2.15
+2024-03-15 12:00:00 INFO  Hourly metrics snapshot saved
+2024-03-15 12:05:44 INFO  Backup job started: incremental
+2024-03-15 12:06:02 INFO  Backup job completed: incremental (18 seconds)
+2024-03-15 12:15:28 WARNING  Disk usage at 85% on /dev/sda1
+2024-03-15 12:30:00 INFO  Scheduled task: temp file cleanup (removed 42 files)
