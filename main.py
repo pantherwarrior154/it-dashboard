@@ -33,6 +33,7 @@ def main():
         print("2) View report")
         print("3) Student info")
         print("4) Exit")
+        print("5) Analyze server log")
 
         choice = input("Select an option: ")
 
@@ -106,8 +107,107 @@ def main():
         elif choice == "4":
             print("Goodbye.")
             break
+        elif choice == "5":
+            analyze_log()
         else:
-            print("Invalid choice. Enter 1, 2, 3.")
+            print("Invalid choice. Enter 1-5.")
+def analyze_log():
+    """Reads server.log, parses entries, and writes log_summary.txt."""
+    # Severity counter — keys added dynamically using .get() to avoid KeyError
+    severity_counts = {}
+    # Set for unique ERROR messages — add() ignores duplicates
+    unique_errors = set()
+    # Set for unique CRITICAL events
+    critical_events = set()
+    # List of all parsed entries as dicts
+    log_entries = []
+
+    # Requirement 9: Wrap file open in try/except for clean error handling
+    try:
+        # Requirement 1: open and iterate line by line
+        with open('server.log', 'r') as f:
+            for line in f:
+                # Requirement 2: strip() removes trailing whitespace/newlines
+                line = line.strip()
+                if not line:
+                    continue
+
+                # Requirement 2: split with maxsplit=3 keeps message intact
+                parts = line.split(maxsplit=3)
+                if len(parts) < 4:
+                    continue
+
+                # Requirement 3: slicing for date (chars 0-10)
+                date_field = line[:10]
+
+                time_field = parts[1]
+
+                # Requirement 2: strip("[]") removes brackets, upper() normalizes case
+                severity = parts[2].strip("[]").upper()
+
+                message = parts[3]
+
+                # Requirement 4: increment count using .get() with default 0
+                severity_counts[severity] = severity_counts.get(severity, 0) + 1
+
+                # Requirement 5: track unique ERROR messages
+                if severity == "ERROR":
+                    unique_errors.add(message)
+
+                # Track unique CRITICAL events
+                if severity == "CRITICAL":
+                    critical_events.add(message)
+
+                # Requirement 6: append parsed entry to list
+                log_entries.append({'date': date_field, 'time': time_field, 'severity': severity, 'message': message})
+
+    except FileNotFoundError:
+        print("Error: server.log not found. Place the log file in the same directory as this script.")
+        exit(1)
+
+    # Requirement 10: list comprehension for ERROR entries only
+    error_entries = [e for e in log_entries if e["severity"] == "ERROR"]
+
+    # Requirement 7: write summary report
+    with open('log_summary.txt', 'w') as out:
+        print("=" * 36, file=out)
+        print(f"{'SERVER LOG ANALYSIS REPORT':^36}", file=out)
+        print("=" * 36, file=out)
+        print(f"Total entries parsed: {len(log_entries):>4}", file=out)
+        error_rate = (len(error_entries) / len(log_entries) * 100) if log_entries else 0
+        print(f"Error rate:           {error_rate:>6.2f}%", file=out)
+        print("\nSeverity Breakdown:", file=out)
+        print("-" * 25, file=out)
+        # Requirement 8: f-string with field-width format spec for alignment
+        for level in ["INFO", "WARNING", "ERROR", "CRITICAL"]:
+            count = severity_counts.get(level, 0)
+            print(f"  {level:<9}: {count:>4}", file=out)
+        print("\nUnique ERROR Messages:", file=out)
+        print("-" * 36, file=out)
+        if unique_errors:
+            for msg in sorted(unique_errors):
+                print(f"  {msg}", file=out)
+        else:
+            print("  None", file=out)
+        print("\nCritical Events:", file=out)
+        print("-" * 36, file=out)
+        if critical_events:
+            for msg in sorted(critical_events):
+                print(f"  {msg}", file=out)
+        else:
+            print("  None", file=out)
+        print("\nAll ERROR Entries:", file=out)
+        print("-" * 36, file=out)
+        for e in error_entries:
+            print(f"  [{e['date']} {e['time']}] {e['message']}", file=out)
+
+    print(f"\nLog analysis complete. {len(log_entries)} entries processed.")
+    print(f"Total errors found: {len(error_entries)}")
+    print(f"Summary written to log_summary.txt")
+    print(f"  Unique ERROR messages: {len(unique_errors)}")
+    print(f"  Critical events:       {len(critical_events)}")
+
+
 # ── Run the program ───────────────────────────────────────
 if __name__ == "__main__":
     main()
