@@ -1,32 +1,20 @@
 ====================================
      SERVER LOG ANALYSIS REPORT     
 ====================================
-Total entries parsed:   41
-Error rate:            12.20%
-
-Severity Breakdown:
--------------------------
-  INFO     :   27
-  WARNING  :    8
-  ERROR    :    5
-  CRITICAL :    1
-
-Unique ERROR Messages:
+Log File    : server.log
+Lines Read  : 11
 ------------------------------------
-  Authentication failure for user: unknown_user (3 attempts)
-  Connection refused to mail-relay.internal:587
-  DNS resolution failed for updates.vendor.com
-  Disk read error on /dev/sdb: I/O timeout
-  Failed to send alert email: SMTP timeout
-
-Critical Events:
+SEVERITY COUNTS
+  INFO      :  4
+  WARNING   :  3
+  ERROR     :  3
+  CRITICAL  :  1
 ------------------------------------
-  Service unresponsive: postgres (PID 4521)
-
-All ERROR Entries:
+ERROR RATE  : 27.27%
 ------------------------------------
-  [2024-03-15 08:22:19] Connection refused to mail-relay.internal:587
-  [2024-03-15 08:22:20] Failed to send alert email: SMTP timeout
-  [2024-03-15 09:12:18] Disk read error on /dev/sdb: I/O timeout
-  [2024-03-15 09:55:03] DNS resolution failed for updates.vendor.com
-  [2024-03-15 11:15:33] Authentication failure for user: unknown_user (3 attempts)
+UNIQUE ERRORS (2 total)
+  - Connection refused to database
+  - NIC timeout on eth0
+CRITICAL EVENTS (1 total)
+  - Primary database unreachable
+====================================

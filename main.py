@@ -32,8 +32,8 @@ def main():
         print("1) Enter server info")
         print("2) View report")
         print("3) Student info")
-        print("4) Exit")
-        print("5) Analyze server log")
+        print("4) Analyze server log")
+        print("5) Exit")
 
         choice = input("Select an option: ")
 
@@ -105,14 +105,18 @@ def main():
             print(f"Date: {today}")
             print("="*40)
         elif choice == "4":
+            analyze_log()
+        elif choice == "5":
             print("Goodbye.")
             break
-        elif choice == "5":
-            analyze_log()
         else:
             print("Invalid choice. Enter 1-5.")
 def analyze_log():
     """Reads server.log, parses entries, and writes log_summary.txt."""
+    import os
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    log_path     = os.path.join(script_dir, 'server.log')
+    summary_path = os.path.join(script_dir, 'log_summary.txt')
     # Severity counter — keys added dynamically using .get() to avoid KeyError
     severity_counts = {}
     # Set for unique ERROR messages — add() ignores duplicates
@@ -125,7 +129,7 @@ def analyze_log():
     # Requirement 9: Wrap file open in try/except for clean error handling
     try:
         # Requirement 1: open and iterate line by line
-        with open('server.log', 'r') as f:
+        with open(log_path, 'r') as f:
             for line in f:
                 # Requirement 2: strip() removes trailing whitespace/newlines
                 line = line.strip()
@@ -168,38 +172,31 @@ def analyze_log():
     # Requirement 10: list comprehension for ERROR entries only
     error_entries = [e for e in log_entries if e["severity"] == "ERROR"]
 
+    error_rate = (len(error_entries) / len(log_entries) * 100) if log_entries else 0
+
     # Requirement 7: write summary report
-    with open('log_summary.txt', 'w') as out:
+    with open(summary_path, 'w') as out:
         print("=" * 36, file=out)
         print(f"{'SERVER LOG ANALYSIS REPORT':^36}", file=out)
         print("=" * 36, file=out)
-        print(f"Total entries parsed: {len(log_entries):>4}", file=out)
-        error_rate = (len(error_entries) / len(log_entries) * 100) if log_entries else 0
-        print(f"Error rate:           {error_rate:>6.2f}%", file=out)
-        print("\nSeverity Breakdown:", file=out)
-        print("-" * 25, file=out)
         # Requirement 8: f-string with field-width format spec for alignment
+        print(f"{'Log File':<12}: server.log", file=out)
+        print(f"{'Lines Read':<12}: {len(log_entries)}", file=out)
+        print("-" * 36, file=out)
+        print("SEVERITY COUNTS", file=out)
         for level in ["INFO", "WARNING", "ERROR", "CRITICAL"]:
             count = severity_counts.get(level, 0)
-            print(f"  {level:<9}: {count:>4}", file=out)
-        print("\nUnique ERROR Messages:", file=out)
+            print(f"  {level:<10}: {count:>2}", file=out)
         print("-" * 36, file=out)
-        if unique_errors:
-            for msg in sorted(unique_errors):
-                print(f"  {msg}", file=out)
-        else:
-            print("  None", file=out)
-        print("\nCritical Events:", file=out)
+        print(f"ERROR RATE  : {error_rate:.2f}%", file=out)
         print("-" * 36, file=out)
-        if critical_events:
-            for msg in sorted(critical_events):
-                print(f"  {msg}", file=out)
-        else:
-            print("  None", file=out)
-        print("\nAll ERROR Entries:", file=out)
-        print("-" * 36, file=out)
-        for e in error_entries:
-            print(f"  [{e['date']} {e['time']}] {e['message']}", file=out)
+        print(f"UNIQUE ERRORS ({len(unique_errors)} total)", file=out)
+        for msg in sorted(unique_errors):
+            print(f"  - {msg}", file=out)
+        print(f"CRITICAL EVENTS ({len(critical_events)} total)", file=out)
+        for msg in sorted(critical_events):
+            print(f"  - {msg}", file=out)
+        print("=" * 36, file=out)
 
     print(f"\nLog analysis complete. {len(log_entries)} entries processed.")
     print(f"Total errors found: {len(error_entries)}")
