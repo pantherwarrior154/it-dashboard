@@ -968,9 +968,14 @@ def main():
             server_name = input ("Server Name : ")
             ip_address = input ("IP Address : ")
             department = input ("Department : ")
-            # Prompt for total_disk_gb and used_disk_gb — cast to int
-            total_disk_gb = int(input("Total Disk (GB): "))
-            used_disk_gb = int(input("Used Disk (GB): "))
+            # Prompt for total_disk_gb and used_disk_gb with safe casting
+            try:
+                total_disk_gb = int(input("Total Disk (GB): "))
+                used_disk_gb = int(input("Used Disk (GB): "))
+            except ValueError:
+                print("\n[!] Error: Disk values must be whole numbers.")
+                report_ready = False
+                continue
             # Validate: check for negative values or used > total
             if total_disk_gb <= 0:
                 print("\n[!] Error: Total disk must be greater than 0.")
@@ -991,9 +996,9 @@ def main():
                 print("No data entered yet. Choose option 1 first.")
             else:
                 # Classify disk usage after calculating usage_pct
-                if usage_pct > 90:
+                if usage_pct >= 90:
                     disk_status = "CRITICAL - Immediate action required"
-                elif usage_pct > 75:
+                elif usage_pct >= 75:
                     disk_status = "WARNING - Disk usage is elevated"
                 else:
                     disk_status = "OK - Disk usage is normal"
@@ -1138,4 +1143,4 @@ def analyze_log():
 
 # ── Run the program ───────────────────────────────────────
 if __name__ == "__main__":
-    run_gui()
+    main()
